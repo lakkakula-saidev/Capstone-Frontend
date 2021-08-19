@@ -1,0 +1,12 @@
+.cardImage {
+    height: 12rem;
+    border-radius: 20px;
+}
+
+.customRounding {
+    border-radius: 10px;
+}
+
+.buttonRounding {
+    border-radius: 10px;
+}
