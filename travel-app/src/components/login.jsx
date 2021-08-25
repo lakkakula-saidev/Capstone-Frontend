@@ -10,7 +10,6 @@ const endpoint = process.env.REACT_APP_BACK_URL;
 export default function Login() {
     const user = useSelector((store) => store.user);
     const dispatch = useDispatch();
-
     const history = useHistory();
 
     const [firstname, setFirstName] = useState("");
@@ -26,7 +25,6 @@ export default function Login() {
             // All redux store actions are to be performed to get the 'User' and his 'Chat' details
             history.push("/searchPlaces");
         }
-        console.log("I am not here..");
     }, []);
 
     async function handleSubmit() {}
@@ -35,8 +33,7 @@ export default function Login() {
         dispatch(allActions.userActions.login_User({ email, password }));
 
         if (Object.keys(user.currentUser).length > 0 && user.currentUser._id) {
-            console.log("I am here..");
-            history.push("/searchPlaces");
+            history.push("/");
         }
         console.log("I am not here..");
     }

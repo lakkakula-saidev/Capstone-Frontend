@@ -1,13 +1,11 @@
 import React from "react";
 import { Container, Button } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
-import Divider from "@material-ui/core/Divider";
 import { IconButton, Avatar } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
-import SearchIcon from "@material-ui/icons/Search";
-import DirectionsIcon from "@material-ui/icons/Directions";
 import Posts from "./posts";
 
 const useStyles = makeStyles((theme) => ({
@@ -32,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PostComponent() {
     const classes = useStyles();
+    const user = useSelector((store) => store.user);
+    const dispatch = useDispatch();
+    const history = useHistory();
     return (
         <Container>
             <div className="d-flex w-100 mt-4">
@@ -41,7 +42,7 @@ export default function PostComponent() {
                             <Avatar variant="rounded" className={classes.large} src="https://source.unsplash.com/random" />
                         </div>
                     </IconButton>
-                    <InputBase className={classes.input} placeholder="What's new, Profile name?" inputProps={{ "aria-label": "search google maps" }} />
+                    <InputBase className={classes.input} placeholder={`What's new, ${user.currentUser.username}?`} inputProps={{ "aria-label": "search google maps" }} />
                     <div className="px-3">
                         <Button className="btn btn-primary mt-1 ml-2 buttonRounding" /* onClick={() => handleLogin()} */>Decline</Button>
                     </div>

@@ -1,6 +1,37 @@
+a[href^="http://maps.google.com/maps"]
+{
+    display: none !important;
+}
+a[href^="https://maps.google.com/maps"]
+{
+    display: none !important;
+}
+
+.gmnoprint a,
+.gmnoprint span,
+.gm-style-cc {
+    display: none;
+}
+
 .cardImage {
     height: 12rem;
     border-radius: 20px;
+}
+
+html,
+body {
+    height: 100vh;
+}
+.mainContainer {
+    height: 100%;
+    width: 100vw !important;
+    overflow-x: hidden;
+
+    /* don't show content that exceeds my height */
+}
+
+.mainContianerRow {
+    height: calc(100vh - 56px) !important;
 }
 
 .customRounding {
@@ -9,4 +40,22 @@
 
 .buttonRounding {
     border-radius: 10px;
+}
+
+#searchList {
+    position: absolute;
+    margin-top: 0px;
+
+    z-index: 10;
+
+    background-color: white;
+}
+
+#reviewParagraph {
+    word-break: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* number of lines to show */
+    -webkit-box-orient: vertical;
 }

@@ -1,6 +1,8 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import blueGrey from "@material-ui/core/colors/blueGrey";
 import BeachAccessIcon from "@material-ui/icons/BeachAccess";
 import PermContactCalendarOutlinedIcon from "@material-ui/icons/PermContactCalendarOutlined";
@@ -39,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NavComponent() {
     const classes = useStyles();
+    const user = useSelector((store) => store.user);
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     return (
         <Container>
@@ -48,10 +53,10 @@ export default function NavComponent() {
                 </div>
                 <div className="px-2">
                     <Box component="div" display="inline" className={classes.divElement}>
-                        Profile Name
+                        {user.currentUser.firstname} {user.currentUser.surname}
                     </Box>
 
-                    <div>@username</div>
+                    <div>@{user.currentUser.username}</div>
                 </div>
             </div>
 

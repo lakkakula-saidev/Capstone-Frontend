@@ -20,7 +20,9 @@ export const initialState = {
     },
     search: {
         query: '',
+        search_hosts: {},
         search_result: [],
+        current_selection: [],
         loading: false,
         error: false
     }

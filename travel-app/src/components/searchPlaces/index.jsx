@@ -9,18 +9,16 @@ export default function SearchPlaces() {
     const [place, setPlace] = useState("");
 
     return (
-        <Container fluid>
-            <Row className="px-5">
-                <Col sm={3} md={3} className="p-3">
-                    <SearchOptions />
-                </Col>
-                <Col sm={6} md={6} className="p-2">
-                    <Map />
-                </Col>
-                <Col sm={3} md={3} className="p-2">
-                    <Hosts />
-                </Col>
-            </Row>
-        </Container>
+        <Row className="px-5 mainContianerRow">
+            <Col sm={4} md={4} className="p-3" style={{ maxHeight: "100%" }}>
+                <SearchOptions />
+            </Col>
+            <Col sm={5} md={5} className="p-4 mt-2" style={{ maxHeight: "100%" }}>
+                <Map />
+            </Col>
+            <Col sm={3} md={3} className="p-3" style={{ maxHeight: "100%" }}>
+                <Hosts />
+            </Col>
+        </Row>
     );
 }

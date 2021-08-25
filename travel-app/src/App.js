@@ -1,4 +1,5 @@
 import './App.css';
+import './components/searchPlaces/styles.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 import axios from "axios";
 import { useSelector } from 'react-redux'
@@ -8,6 +9,7 @@ import LoginPage from './components/login.jsx'
 import MainPage from './components/mainPage/index.jsx'
 import Navbar from './components/navBar'
 import SearchPlaces from './components/searchPlaces/index.jsx'
+import { Container } from 'react-bootstrap';
 
 export default function App() {
 
@@ -30,19 +32,19 @@ export default function App() {
   if (!user.currentUser._id) {
     console.log(!user.currentUser._id)
     return <Router>
-      <Route render={routerProps => <LoginPage {...routerProps} />} path='/' />
+      <Route render={routerProps => <LoginPage {...routerProps} />} exact path='/' />
     </Router>
   } else {
 
     return (
       <Router>
-        <div>
+        <Container fluid className="mainContainer px-0">
           <Navbar />
           <Switch>
             <Route render={routerProps => <MainPage {...routerProps} />} exact path='/' />
             <Route render={routerProps => <SearchPlaces {...routerProps} />} exact path='/search' />
           </Switch>
-        </div>
+        </Container>
       </Router>
     );
   }
