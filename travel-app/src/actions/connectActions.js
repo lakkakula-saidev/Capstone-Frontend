@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 
-const search_Place = (query) => {
+const new_connection = (data) => {
     return async (dispatch) => {
 
 
@@ -9,29 +9,16 @@ const search_Place = (query) => {
         let response;
         try {
             dispatch({
-                type: 'SEARCH_HOSTS_LOADING',
-                payload: true,
-            })
-
-            dispatch({
                 type: 'SET_LOADING',
                 payload: true,
             })
-            response = await axios.get(endpoint + '/places?city=' + query, { withCredentials: true });
+            response = await axios.post(endpoint + '/user/me/newConnection', data, { withCredentials: true });
 
             if (response) {
-                console.log(response.data)
+
                 dispatch({
-                    type: 'ADD_SEARCH_RESULTS',
-                    payload: response.data.google
-                })
-                dispatch({
-                    type: 'ADD_HOST_RESULTS',
-                    payload: response.data.hosts
-                })
-                dispatch({
-                    type: 'SEARCH_HOSTS_LOADING',
-                    payload: false,
+                    type: 'SET_USER',
+                    payload: response.data
                 })
                 dispatch({
                     type: 'SET_LOADING',
@@ -63,8 +50,7 @@ const search_Place = (query) => {
     }
 }
 
-
-const set_current_selection = (place) => {
+const accept_connection = (data) => {
     return async (dispatch) => {
 
 
@@ -75,13 +61,13 @@ const set_current_selection = (place) => {
                 type: 'SET_LOADING',
                 payload: true,
             })
-            response = await axios.get(endpoint + '/places/' + place.place_id, { withCredentials: true });
+            response = await axios.post(endpoint + '/user/me/acceptConnection', data, { withCredentials: true });
 
             if (response) {
 
                 dispatch({
-                    type: 'ADD_CURRENT_SELECTION',
-                    payload: response.data.result
+                    type: 'SET_USER',
+                    payload: response.data
                 })
                 dispatch({
                     type: 'SET_LOADING',
@@ -113,7 +99,53 @@ const set_current_selection = (place) => {
     }
 }
 
-export default { search_Place, set_current_selection }
+const reject_connection = (data) => {
+    return async (dispatch) => {
 
-/*
-"/users?firstname=/^" */
+
+        const endpoint = process.env.REACT_APP_BACK_URL;
+        let response;
+        try {
+            dispatch({
+                type: 'SET_LOADING',
+                payload: true,
+            })
+            response = await axios.post(endpoint + '/user/me/rejectConnection', data, { withCredentials: true });
+
+            if (response) {
+
+                dispatch({
+                    type: 'SET_USER',
+                    payload: response.data
+                })
+                dispatch({
+                    type: 'SET_LOADING',
+                    payload: false,
+                })
+            }
+            else {
+                console.log('Error has Occured!!')
+                dispatch({
+                    type: 'SET_LOADING',
+                    payload: false,
+                })
+                dispatch({
+                    type: 'SET_ERROR',
+                    payload: true,
+                })
+            }
+        } catch (error) {
+            console.log(error);
+            dispatch({
+                type: 'SET_LOADING',
+                payload: false,
+            })
+            dispatch({
+                type: 'SET_ERROR',
+                payload: true,
+            })
+        }
+    }
+}
+
+export default { new_connection, accept_connection, reject_connection }

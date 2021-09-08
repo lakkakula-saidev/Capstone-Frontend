@@ -12,11 +12,14 @@ export default function Login() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const [firstname, setFirstName] = useState("");
-    const [surname, setSurname] = useState("");
-    const [email, setEmail] = useState("maryam70@hotmail.com");
+    const [firstname, setFirstName] = useState("Saidev");
+    const [surname, setSurname] = useState("Lakkakula");
+    const [username, setUserame] = useState("saidev_lakkakula");
+    const [city, setCity] = useState("Rostock");
+    const [country, setCountry] = useState("Germany");
+    const [email, setEmail] = useState("saidev@gmail.com");
     const [alreadyUser, setAlreadyUser] = useState(false);
-    const [password, setPassword] = useState("Pass@1234");
+    const [password, setPassword] = useState("saidev123");
 
     useEffect(() => {
         dispatch(allActions.userActions.persist_user_login());
@@ -27,7 +30,16 @@ export default function Login() {
         }
     }, []);
 
-    async function handleSubmit() {}
+    async function handleRegister() {
+        dispatch(allActions.userActions.register_User({ firstname, surname, username, city, country, email, password }));
+
+        if (Object.keys(user.currentUser).length > 0 && user.currentUser._id) {
+            history.push("/");
+        }
+        console.log("I am not here..");
+    }
+
+    function handleSubmit() {}
 
     async function handleLogin() {
         dispatch(allActions.userActions.login_User({ email, password }));
@@ -66,9 +78,9 @@ export default function Login() {
                                     </>
                                 )}
                             </p>
-                            <div className="px-6 mx-5 mt-5 ">
+                            <div className="px-6 mx-5 mt-3 ">
                                 <h2 className="font-weight-bold mb-4" style={{ width: "250px" }}>
-                                    Connect your Google account
+                                    Register now...
                                 </h2>
                                 <Form onSubmit={handleSubmit}>
                                     <div className=" p-1 bg-white">
@@ -80,6 +92,20 @@ export default function Login() {
                                             <Form.Group className=" pl-2 flex-grow-1 font-weight-bold" size="" controlId="surname">
                                                 <Form.Label>Surname</Form.Label>
                                                 <Form.Control className="bg-light" autoFocus type="surname" value={surname} onChange={(e) => setSurname(e.target.value)} />
+                                            </Form.Group>
+                                        </div>
+                                        <Form.Group className={` font-weight-bold ${alreadyUser ? "d-none" : ""}`} size="lg" controlId="email">
+                                            <Form.Label>Username</Form.Label>
+                                            <Form.Control className="bg-light" autoFocus type="username" value={username} onChange={(e) => setUserame(e.target.value)} />
+                                        </Form.Group>
+                                        <div className={`${alreadyUser ? "d-none" : "d-flex"} flex-row space-between `}>
+                                            <Form.Group className=" pr-2 flex-grow-1 font-weight-bold" size="" controlId="name">
+                                                <Form.Label>City</Form.Label>
+                                                <Form.Control autoFocus type="city" value={city} className="bg-light" onChange={(e) => setCity(e.target.value)} />
+                                            </Form.Group>
+                                            <Form.Group className=" pl-2 flex-grow-1 font-weight-bold" size="" controlId="surname">
+                                                <Form.Label>Country</Form.Label>
+                                                <Form.Control className="bg-light" autoFocus type="country" value={country} onChange={(e) => setCountry(e.target.value)} />
                                             </Form.Group>
                                         </div>
                                         <Form.Group className="font-weight-bold" size="lg" controlId="email">
@@ -97,7 +123,7 @@ export default function Login() {
                                     </div>
 
                                     <Form.Group className="d-flex">
-                                        <Button block variant="outline-success" className={`${alreadyUser ? "d-none flex-grow-1" : ""}  py-2 mt-1 mr-2`} type="submit">
+                                        <Button block variant="outline-success" className={`${alreadyUser ? "d-none flex-grow-1" : ""}  py-2 mt-1 mr-2`} type="submit" onClick={() => handleRegister()}>
                                             Register
                                         </Button>
                                         <Button block className={`${alreadyUser ? "" : "d-none flex-grow-1 "} btn btn-success py-2 mt-1 ml-2`} onClick={() => handleLogin()}>

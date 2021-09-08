@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
 import { Card, CardHeader, CardMedia, CardContent, Avatar, IconButton } from "@material-ui/core";
 import { red } from "@material-ui/core/colors";
 import MoreHoriIcon from "@material-ui/icons/MoreHoriz";
+import allActions from "../../actions";
+import uniqid from "uniqid";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: "100%"
+        width: "100%",
+        marginBottom: "2rem"
     },
     media: {
         height: 0,
@@ -33,33 +36,44 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Posts() {
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const post = useSelector((store) => store.post);
+    const user = useSelector((store) => store.user.currentUser);
+    const allPosts = post.posts;
+
+    const completePosts = Object.keys(post.user_new_post).length > 0 ? [...allPosts, post.user_new_post] : allPosts;
+
+    useEffect(() => {
+        dispatch(allActions.postActions.get_all_posts());
+    }, []);
 
     return (
-        <div>
-            <Card className={classes.root}>
-                <CardHeader
-                    avatar={
-                        <div className="px-2 py-1">
-                            <Avatar variant="rounded" className={classes.large} src="https://source.unsplash.com/random" />
-                        </div>
-                    }
-                    action={
-                        <IconButton aria-label="settings">
-                            <MoreHoriIcon />
-                        </IconButton>
-                    }
-                    title="Shrimp and Chorizo Paella"
-                    subheader="September 14, 2016"
-                />
-                <CardContent className={classes.cardText}>
-                    <div className="px-2 ">
-                        This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.
-                    </div>
-                </CardContent>
-                <div className="px-4 pb-4">
-                    <CardMedia className={classes.media} image="https://source.unsplash.com/random" title="Paella dish" />
-                </div>
-            </Card>
+        <div className="d-flex flex-column-reverse w-100">
+            {completePosts?.length > 0
+                ? completePosts.map((post) => (
+                      <Card className={classes.root} key={uniqid()}>
+                          <CardHeader
+                              avatar={
+                                  <div className="w-100 px-2 py-1">
+                                      <Avatar variant="rounded" className="img-fluid" src={post.author.avatar !== undefined && post.author.avatar !== "none" ? post.author.avatar : ""} />
+                                  </div>
+                              }
+                              action={
+                                  <IconButton aria-label="settings">
+                                      <MoreHoriIcon />
+                                  </IconButton>
+                              }
+                              title={`${post.author.firstname} ${post.author.surname}`}
+                              /* subheader="September 14, 2016" */
+                              subheader={`${post.city}, ${post.country}`}
+                          />
+                          <CardContent className={classes.cardText}>
+                              <div className="px-2 ">{post.content}</div>
+                          </CardContent>
+                          <div className="px-4 pb-4">{post.hasOwnProperty("cover") ? <CardMedia className={classes.media} image={post.cover} title="Paella dish" /> : ""}</div>
+                      </Card>
+                  ))
+                : ""}
         </div>
     );
 }

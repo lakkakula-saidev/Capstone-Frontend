@@ -10,6 +10,12 @@ export const chatReducer = (state = initialState.chat, action) => {
                 ...state,
                 chat_history: action.payload
             }
+        case 'NEW_CONNECTION':
+
+            return {
+                ...state,
+                new_connection: action.payload
+            }
         case 'CURRENT_ROOM_CHAT':
 
             return {

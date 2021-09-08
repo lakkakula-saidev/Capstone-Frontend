@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import { makeStyles } from "@material-ui/core/styles";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import blueGrey from "@material-ui/core/colors/blueGrey";
 import BeachAccessIcon from "@material-ui/icons/BeachAccess";
@@ -45,6 +45,15 @@ export default function NavComponent() {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    function handleTrips() {
+        console.log("i ma here..");
+        history.push("/trips");
+    }
+
+    function handleHome() {
+        history.push("/");
+    }
+
     return (
         <Container>
             <div className="d-flex justify-content-start align-items-center p-4 my-3 bg-white customRounding">
@@ -60,8 +69,8 @@ export default function NavComponent() {
                 </div>
             </div>
 
-            <List component="nav" className="classes.root py-3 px-4 my-3 bg-white customRounding" aria-label="mailbox folders">
-                <ListItem>
+            <List component="nav" className="classes.root py-3 px-4 my-3 bg-white customRounding cursor-pointer" aria-label="mailbox folders">
+                <ListItem onClick={() => handleHome()}>
                     <ListItemAvatar>
                         <Avatar style={{ backgroundColor: "white", color: "black" }}>
                             <HomeOutlinedIcon />
@@ -80,13 +89,13 @@ export default function NavComponent() {
                     <ListItemText primary="People" classes={{ primary: classes.listItemText }} />
                 </ListItem>
                 <Divider variant="middle" className={classes.divider} />
-                <ListItem>
+                <ListItem onClick={() => handleTrips()}>
                     <ListItemAvatar>
                         <Avatar style={{ backgroundColor: "white", color: "black" }}>
                             <PhotoSizeSelectActualOutlinedIcon />
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="Photos" classes={{ primary: classes.listItemText }} />
+                    <ListItemText primary="Trips" classes={{ primary: classes.listItemText }} />
                 </ListItem>
                 <Divider variant="middle" className={classes.divider} />
                 <ListItem>

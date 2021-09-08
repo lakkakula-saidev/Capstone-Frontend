@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { GoogleMap, LoadScript, useJsApiLoader, Marker, InfoWindow } from "@react-google-maps/api";
-import { Spinner, Container } from "react-bootstrap";
+import { GoogleMap, useJsApiLoader, Marker, InfoWindow } from "@react-google-maps/api";
+import { Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import allActions from "../../actions/index.js";
 import { makeStyles } from "@material-ui/core/styles";

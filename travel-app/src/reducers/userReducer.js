@@ -7,7 +7,8 @@ export const userReducer = (state = initialState.user, action) => {
 
             return {
                 ...state,
-                currentUser: action.payload
+                currentUser: action.payload,
+                loggedIn: Object.keys(action.payload).length > 0 ? true : false
             }
         case 'SET_LOADING':
             return {

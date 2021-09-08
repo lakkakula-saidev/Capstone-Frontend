@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./styles.css";
 import { Carousel } from "react-carousel-minimal";
 import { makeStyles } from "@material-ui/core/styles";
 import { Avatar, Divider } from "@material-ui/core";
@@ -23,19 +22,23 @@ const useStyles = makeStyles((theme) => ({
 const photos_Endpoint = process.env.REACT_APP_PHOTO_URL;
 const placesKey = process.env.REACT_APP_GOOGLE_PLACES_KEY;
 
-export default function SearchOptions() {
+export default function TripDetails() {
     const classes = useStyles();
-    const selectedPlace = useSelector((store) => store.search.current_selection);
+    const selectedTrip = useSelector((store) => store.post.selected_trip_details);
+    console.log(selectedTrip);
 
     function firstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
     }
 
     function photosCarousel() {
-        if (selectedPlace && Object.keys(selectedPlace).length > 0 && selectedPlace.hasOwnProperty("photos")) {
-            const carousel = selectedPlace.photos.map((photo) => {
-                return { image: `${photos_Endpoint}=${photo.photo_reference}&maxwidth=1000&key=${placesKey}` };
-            });
+        if (selectedTrip && Object.keys(selectedTrip).length > 0 && selectedTrip.hasOwnProperty("cover")) {
+            const carousel = [
+                {
+                    image: selectedTrip.cover === "none" ? `https://source.unsplash.com/1600x900/?${selectedTrip.country}` : selectedTrip.cover
+                }
+            ];
+
             return carousel;
         } else return null;
     }
@@ -49,7 +52,7 @@ export default function SearchOptions() {
                     <div className="d-flex flex-column align-items-start">
                         <div>
                             <Typography variant="h6" color="textPrimary" component="p">
-                                Photography: {selectedPlace ? selectedPlace.name : ""}
+                                Photography: {selectedTrip ? selectedTrip.name : ""}
                             </Typography>
                         </div>
                         <div className="mt-2" style={{ minWidth: "100%" }}>
@@ -57,7 +60,7 @@ export default function SearchOptions() {
                                 <Carousel
                                     data={imagesData}
                                     width="850px"
-                                    time={5000}
+                                    time={2000}
                                     height="200px"
                                     radius="10px"
                                     /*    slideNumber={true}
@@ -81,27 +84,22 @@ export default function SearchOptions() {
                     </div>
                 </Col>
             </Row>
-            {selectedPlace && Object.keys(selectedPlace).length > 0 ? (
+            {selectedTrip && Object.keys(selectedTrip).length > 0 ? (
                 <>
                     <Row className="font-weight-bold">
                         <Col sm={12} md={12} className="py-2 pl-0">
-                            <div className="d-flex flex-row align-items-end">
-                                <div>
-                                    <Typography variant="h6" color="textPrimary" component="p">
-                                        Reviews:
-                                    </Typography>
-                                </div>
-                                <div>
-                                    <Rating name="read-only" value={selectedPlace.rating} precision={0.1} size="small" readOnly />
-                                </div>
+                            <div className="d-flex flex-row">
+                                <Typography variant="h6" color="textPrimary" component="p">
+                                    Trip details:
+                                </Typography>
                             </div>
                         </Col>
                     </Row>
 
-                    <Row className="customScrollbar" style={{ overflowY: "scroll" }}>
+                    <Row className="customScrollbar " style={{ overflowY: "scroll" }}>
                         <Col sm={12} md={12} className=" pl-0">
-                            {selectedPlace.hasOwnProperty("reviews") && selectedPlace.reviews.length > 0
-                                ? selectedPlace.reviews.map((review) => (
+                            {selectedTrip.hasOwnProperty("reviews") && selectedTrip.reviews.length > 0
+                                ? selectedTrip.reviews.map((review) => (
                                       <>
                                           <Row key={review.author_name}>
                                               <Col sm={3} md={3} className="py-2 pl-0">

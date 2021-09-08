@@ -11,7 +11,7 @@ const register_User = (data) => {
                 type: 'SET_LOADING',
                 payload: true,
             })
-            response = await axios.post(endpoint + "/users/register", { ...data }); // data: {firstname, surname, email, password}
+            response = await axios.post(endpoint + "/user/register", { ...data }); // data: {firstname, surname, email, password}
             if (response) {
 
                 dispatch({
