@@ -1,11 +1,12 @@
-import React, { useMemo, useState, useEffect, useRef } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Container, Button, Col, Form, Row } from "react-bootstrap";
 import MoreHorizOutlinedIcon from "@material-ui/icons/MoreHorizOutlined";
 import { grey, blueGrey } from "@material-ui/core/colors";
 import { MicFill, Paperclip, EmojiLaughing } from "react-bootstrap-icons";
 import Typography from "@material-ui/core/Typography";
-import ScrollableFeed from "react-scrollable-feed";
+import Picker from "emoji-picker-react";
+import Popover from "@material-ui/core/Popover";
 import io from "socket.io-client";
 import allActions from "../../actions/index.js";
 import { makeStyles, DialogActions, DialogContent, DialogContentText, DialogTitle, Dialog, Avatar, TextField, Chip } from "@material-ui/core";
@@ -64,6 +65,9 @@ const useStyles = makeStyles((theme) => ({
         right: "1%",
         bottom: "0%",
         borderRadius: "5px"
+    },
+    popoverRoot: {
+        transition: "opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important"
     }
 }));
 
@@ -88,39 +92,39 @@ export default function FriendsList() {
     const chat = useSelector((store) => store.chat);
     const socket = useMemo(() => io(endpoint, { transports: ["websocket"] }), []);
     const [message, setMessage] = useState("");
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const openEmoji = Boolean(anchorEl);
+    const id = openEmoji ? "simple-popover" : undefined;
     const receiver = chat.current_chat_room.members?.filter((member) => member._id !== user._id)[0];
 
     // Socked useEffect
-    useEffect(
-        () => {
-            /* ss */
-            console.log("adding event listeners");
-            socket.on("connect", () => {
-                // with on we're listening for an event
+    useEffect(() => {
+        /* ss */
+        console.log("adding event listeners");
+        socket.on("connect", () => {
+            // with on we're listening for an event
 
-                socket.emit("did-connect" /*userId */);
-            });
+            socket.emit("did-connect" /*userId */);
+        });
 
-            socket.on("message", ({ message, roomId, createdAt }) => {
-                console.log({ message, roomId }, "This is emit from back..");
-                dispatch(allActions.chatActions.push_new_message({ message: message.message, sender: message.sender, createdAt: createdAt }));
-            });
-        },
-        [
-            /* chat.current_chat_room._id, user.currentUser.username */
-        ]
-    );
+        socket.on("message", ({ message, roomId, createdAt }) => {
+            console.log({ message, roomId }, "This is emit from back..");
+            dispatch(allActions.chatActions.push_new_message({ message: message.message, sender: message.sender, createdAt: createdAt }));
+        });
+    }, [socket]);
 
     useEffect(() => {
         socket.emit("joinRoom", { username: user.username, roomId: chat.current_chat_room._id });
 
         socket.on("joinRoom", { username: user.username, roomId: chat.current_chat_room._id });
     }, [chat.current_chat_room._id, user.username]);
+    const [testing, setTesting] = useState(0);
 
     function handleNewMessage(e) {
         e.preventDefault();
         const roomId = chat.current_chat_room._id;
-
+        const i = testing + 1;
+        setTesting(i);
         socket.emit("sendMessage", {
             roomId,
             message: {
@@ -129,6 +133,8 @@ export default function FriendsList() {
             }
         });
         const date = new Date().toISOString();
+
+        console.log(testing);
         dispatch(allActions.chatActions.push_new_message({ message: message, sender: user._id, createdAt: date }));
         setMessage("");
     }
@@ -176,6 +182,14 @@ export default function FriendsList() {
             </div>
         );
     }
+
+    const handleClickEmoji = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleCloseEmoji = () => {
+        setAnchorEl(null);
+    };
+
     return (
         <div className="w-100">
             {friendsList !== null
@@ -272,21 +286,41 @@ export default function FriendsList() {
                                 className="w-100"
                                 id="outlined-size-small"
                                 value={message}
+                                inputRef={(input) => input && input.focus()}
                                 onChange={(e) => setMessage(e.target.value)}
                                 placeholder="Type a message"
                                 variant="outlined"
                                 size="small"
                             />
+                            {/* <InputEmoji value={message} height={10} onChange={setMessage} cleanOnEnter onEnter={(e) => handleNewMessage(e)} placeholder="Type a message" /> */}
                         </form>
-                        <div className="px-1">
+                        <div className="px-1" onClick={handleClickEmoji}>
                             <EmojiLaughing size="20" />
                         </div>
+
                         <div className="px-1">
                             <Paperclip size="20" />
                         </div>
                     </div>
                 </DialogActions>
             </Dialog>
+            <Popover
+                id={id}
+                open={openEmoji}
+                anchorEl={anchorEl}
+                onClose={handleCloseEmoji}
+                disableAutoFocus={true}
+                anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "center"
+                }}
+                transformOrigin={{
+                    vertical: "top",
+                    horizontal: "center"
+                }}
+            >
+                <Picker onEmojiClick={(e, emojiObject) => setMessage(message + emojiObject.emoji)} />
+            </Popover>
         </div>
     );
 }

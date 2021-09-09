@@ -175,7 +175,7 @@ export const handle_current_room = (target) => {
 export const push_new_message = (data) => {
 
     return (dispatch) => {
-
+        console.log('Im here...')
         try {
 
             dispatch({

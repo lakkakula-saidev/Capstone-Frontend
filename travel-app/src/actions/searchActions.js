@@ -76,7 +76,7 @@ const set_current_selection = (place) => {
                 payload: true,
             })
             response = await axios.get(endpoint + '/places/' + place.place_id, { withCredentials: true });
-
+            console.log(response)
             if (response) {
 
                 dispatch({

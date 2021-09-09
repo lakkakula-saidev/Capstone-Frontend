@@ -6,6 +6,7 @@ import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import { Avatar } from "@material-ui/core";
 import { green, blueGrey } from "@material-ui/core/colors";
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
+
 import allActions from "../../actions/index.js";
 
 const useStyles = makeStyles((theme) => ({
@@ -70,40 +71,43 @@ export default function FriendsList() {
                         </span>{" "}
                         found in this region
                     </div>
-                    <div className="d-flex flex-column p-3 my-3 bg-white customRounding">
-                        {filteredHosts && filteredHosts.length > 0 ? (
-                            filteredHosts.map((host) => {
-                                const prevFriends = friendsList.some((friend) => friend.recipient._id.toString() === host._id.toString() || friend.requester._id.toString() === host._id.toString());
-                                console.log(prevFriends);
+                    {filteredHosts && filteredHosts.length > 0 ? (
+                        <div className="d-flex flex-column p-3 my-3 bg-white customRounding">
+                            {filteredHosts && filteredHosts.length > 0 ? (
+                                filteredHosts.map((host) => {
+                                    const prevFriends = friendsList.some(
+                                        (friend) => friend.recipient._id.toString() === host._id.toString() || friend.requester._id.toString() === host._id.toString()
+                                    );
+                                    console.log(prevFriends);
 
-                                return (
-                                    <div className="pb-2 customRounding cursor-pointer hoverClass" id={host._id}>
-                                        <div className="d-flex justify-content-between align-items-center pt-2">
-                                            <div className="d-flex justify-content-start align-items-center">
-                                                <div className="px-2">
-                                                    <Avatar variant="rounded" className={classes.large} src={host.avatar !== "none" ? host.avatar : "https://source.unsplash.com/random"} />
-                                                </div>
-                                                <div className="px-2">
-                                                    <div>
-                                                        {host.firstname} {host.surname}
+                                    return (
+                                        <div className="pb-2 customRounding cursor-pointer hoverClass" id={host._id}>
+                                            <div className="d-flex justify-content-between align-items-center pt-2">
+                                                <div className="d-flex justify-content-start align-items-center">
+                                                    <div className="px-2">
+                                                        <Avatar variant="rounded" className={classes.large} src={host.avatar !== "none" ? host.avatar : "https://source.unsplash.com/random"} />
+                                                    </div>
+                                                    <div className="px-2">
+                                                        <div>
+                                                            {host.firstname} {host.surname}
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div className="px-2">
-                                                {prevFriends ? (
-                                                    <PeopleAltIcon className={classes.PeopleAltIcon} />
-                                                ) : (
-                                                    <PersonAddIcon
-                                                        className={classes.small}
-                                                        onClick={() => dispatch(allActions.connectActions.new_connection({ sender_id: user._id, receiver_id: host._id }))}
-                                                    />
-                                                )}
+                                                <div className="px-2">
+                                                    {prevFriends ? (
+                                                        <PeopleAltIcon className={classes.PeopleAltIcon} />
+                                                    ) : (
+                                                        <PersonAddIcon
+                                                            className={classes.small}
+                                                            onClick={() => dispatch(allActions.connectActions.new_connection({ sender_id: user._id, receiver_id: host._id }))}
+                                                        />
+                                                    )}
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                );
-                                {
-                                    /* <div className="d-flex justify-content-between align-items-center cursor-pointer" style={{ backgroundColor: prevFriends ? "#8CC3A9" : "#FFFFFF" }} key={host._id}>
+                                    );
+                                    {
+                                        /* <div className="d-flex justify-content-between align-items-center cursor-pointer" style={{ backgroundColor: prevFriends ? "#8CC3A9" : "#FFFFFF" }} key={host._id}>
                                         <div className="d-flex justify-content-start align-items-center">
                                             <div className="px-2">
                                                 <Avatar variant="rounded" className={classes.large} src={host.avatar !== "none" ? host.avatar : "https://source.unsplash.com/random"} />
@@ -121,12 +125,15 @@ export default function FriendsList() {
                                             />
                                         </div>
                                     </div> */
-                                }
-                            })
-                        ) : (
-                            <></>
-                        )}
-                    </div>
+                                    }
+                                })
+                            ) : (
+                                <></>
+                            )}
+                        </div>
+                    ) : (
+                        <></>
+                    )}
                 </>
             ) : filteredHosts === null ? (
                 <div>No Host found</div>
