@@ -12,14 +12,14 @@ export default function Login() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const [firstname, setFirstName] = useState("Saidev");
-    const [surname, setSurname] = useState("Lakkakula");
-    const [username, setUserame] = useState("saidev_lakkakula");
-    const [city, setCity] = useState("Rostock");
-    const [country, setCountry] = useState("Germany");
-    const [email, setEmail] = useState("saidev@gmail.com");
+    const [firstname, setFirstName] = useState("");
+    const [surname, setSurname] = useState("");
+    const [username, setUserame] = useState("");
+    const [city, setCity] = useState("");
+    const [country, setCountry] = useState("");
+    const [email, setEmail] = useState("");
     const [alreadyUser, setAlreadyUser] = useState(false);
-    const [password, setPassword] = useState("saidev123");
+    const [password, setPassword] = useState("");
 
     useEffect(() => {
         dispatch(allActions.userActions.persist_user_login());
