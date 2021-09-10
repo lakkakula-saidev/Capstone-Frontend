@@ -89,8 +89,6 @@ export default function PostComponent() {
         if (!cityError && country && !contentError) {
             if (imageFormData !== null) {
                 const formData = new FormData();
-                console.log(formData);
-                console.log(country);
                 formData.append("city", city);
                 formData.append("country", country.label);
                 formData.append("content", content);
@@ -104,7 +102,11 @@ export default function PostComponent() {
                 dispatch(allActions.postActions.new_post(formData));
                 handleClose();
             } else {
-                dispatch(allActions.postActions.new_post({ city, country: country.label, content }));
+                const formData = new FormData();
+                formData.append("city", city);
+                formData.append("country", country.label);
+                formData.append("content", content);
+                dispatch(allActions.postActions.new_post(formData));
                 handleClose();
             }
         }

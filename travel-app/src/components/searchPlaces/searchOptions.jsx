@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./styles.css";
-import { Carousel } from "react-carousel-minimal";
+import "./styles.css"; /* 
+import { Carousel } from "react-carousel-minimal"; */
 import { makeStyles } from "@material-ui/core/styles";
 import { Avatar, Divider } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 import Typography from "@material-ui/core/Typography";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -41,6 +43,7 @@ export default function SearchOptions() {
     }
 
     const imagesData = photosCarousel();
+    console.log(imagesData, typeof imagesData);
 
     return (
         <div className="d-flex flex-column" style={{ maxHeight: "100%" }}>
@@ -54,14 +57,12 @@ export default function SearchOptions() {
                         </div>
                         <div className="mt-2" style={{ minWidth: "100%" }}>
                             {imagesData ? (
-                                <Carousel
+                                /* <Carousel
                                     data={imagesData}
                                     width="850px"
                                     time={5000}
                                     height="200px"
                                     radius="10px"
-                                    /*    slideNumber={true}
-                                        slideNumberStyle={slideNumberStyle} */
                                     captionPosition="bottom"
                                     dots={true}
                                     automatic={true}
@@ -73,7 +74,14 @@ export default function SearchOptions() {
                                         maxWidth: "850px",
                                         maxHeight: "500px"
                                     }}
-                                />
+                                /> */
+                                <Carousel showThumbs={false} autoPlay={true} interval={10000} showIndicators={false}>
+                                    {imagesData.map((item) => (
+                                        <div>
+                                            <img src={item.image} />
+                                        </div>
+                                    ))}
+                                </Carousel>
                             ) : (
                                 "No images yet"
                             )}
@@ -99,7 +107,7 @@ export default function SearchOptions() {
                     </Row>
 
                     <Row className="customScrollbar" style={{ overflowY: "scroll" }}>
-                        <Col sm={12} md={12} className=" pl-0">
+                        <Col sm={12} md={12} className=" ">
                             {selectedPlace.hasOwnProperty("reviews") && selectedPlace.reviews.length > 0
                                 ? selectedPlace.reviews.map((review) => (
                                       <>

@@ -146,14 +146,13 @@ export default function Navbar() {
                                             <List className="cursor-pointer">
                                                 {loading ? <div>...loading</div> : <></>}
                                                 {suggestions.map((suggestion) => {
-                                                    const style = { backgroundColor: suggestion.active ? "blue" : "white" };
+                                                    const style = { backgroundColor: suggestion.active ? "#9fa8da" : "white", borderRadius: "5px" };
                                                     const country = suggestion.description.split(", ")[suggestion.description.split(", ").length - 1];
 
                                                     /* country = country.length > 2 ? options.getValue(country) : country; */
 
                                                     return (
                                                         <ListItem {...getSuggestionItemProps(suggestion, { style })}>
-                                                            {" "}
                                                             <ListItemAvatar>
                                                                 <PlaceIcon />
                                                                 <ReactCountryFlag
@@ -186,24 +185,3 @@ export default function Navbar() {
         </div>
     );
 }
-
-/*  <PlacesAutocomplete value={address} onChange={setAddress} onSelect={handleSelect}>
-     {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-         <>
-             <DialogTitle id="scroll-dialog-title">
-                 <TextField classes={classes} value={address} size="large" {...getInputProps({ placeholder: "Search", className: classes.input })} variant="outlined" />
-             </DialogTitle>
-
-             <DialogContentText id="scroll-dialog-description" ref={descriptionElementRef} tabIndex={-1}>
-                 <List id="searchList">
-                     {loading ? <div>...loading</div> : null}
-
-                     {suggestions.map((suggestion) => {
-                         const style = { backgroundColor: suggestion.active ? "blue" : "white" };
-                         return <ListItem {...getSuggestionItemProps(suggestion, { style })}>{suggestion.description}</ListItem>;
-                     })}
-                 </List>
-             </DialogContentText>
-         </>
-     )}
- </PlacesAutocomplete>; */

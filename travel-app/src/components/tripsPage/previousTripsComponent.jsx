@@ -57,19 +57,19 @@ export default function PreviousTripsComponent() {
     }
 
     return (
-        <Container className="h-100 customScrollbar" style={{ overflowY: "scroll" }}>
-            <Row className=" mt-4">
+        <Container className="h-100 customScrollbar bg-white mt-3 py-3 px-4 customRoundingContainer" style={{ overflowY: "scroll" }}>
+            <Row className="no-gutters ">
                 <Typography variant="h5" color="textPrimary" component="p">
                     Your completed expeditions
                 </Typography>
             </Row>
             <Row className=" mt-4">
                 {userPosts.user_posts.map((item) => (
-                    <Col sm={12} md={4} key={item._id} onClick={() => setTrip(item)}>
+                    <Col sm={12} md={4} className="pb-4" key={item._id} onClick={() => setTrip(item)}>
                         <ImageList className={classes.ImageList}>
                             <ImageListItem className="w-100 tripsItem">
                                 <img src={`https://source.unsplash.com/1600x900/?${item.country}`} className="cursor-pointer" />
-                                <ImageListItemBar className={classes.ImageListItemBar} title={`${item.city}`} subtitle={<span> {item.country}</span>} />
+                                <ImageListItemBar className={classes.ImageListItemBar} title={`${item.country}`} /* subtitle={<span> {item.country}</span> }*/ />
                             </ImageListItem>
                         </ImageList>
                     </Col>

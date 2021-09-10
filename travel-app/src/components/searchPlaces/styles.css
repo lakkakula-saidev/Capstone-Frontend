@@ -177,3 +177,17 @@ body {
 .MuiPaper-elevation1 {
     box-shadow: none !important;
 }
+
+.carousel .thumb img {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.carousel .slide img {
+    max-height: 250px; /* change this to whatever you want */
+    width: auto;
+}
+
+.customRoundingContainer {
+    border-radius: 10px;
+}
