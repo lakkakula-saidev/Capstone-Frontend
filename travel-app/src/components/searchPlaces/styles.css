@@ -7,6 +7,16 @@ a[href^="https://maps.google.com/maps"]
     display: none !important;
 }
 
+.centered {
+    position: absolute;
+    top: 0;
+    bottom: 10%;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+}
+
 .gmnoprint a,
 .gmnoprint span,
 .gm-style-cc {
@@ -167,7 +177,6 @@ body {
 
 .hoverClass:hover {
     background-color: #cfd8dc;
-    color: white;
 }
 
 .tripsItem > div {

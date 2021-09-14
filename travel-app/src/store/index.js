@@ -26,6 +26,8 @@ export const initialState = {
         user_new_post: {},
         user_posts: [],
         selected_trip_details: {},
+        selected_trip_country: '',
+        selected_place: '',
         loading: false,
         error: false
     },

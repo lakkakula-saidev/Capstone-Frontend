@@ -1,5 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
+import axios from "axios";
+import LogoAnimation from "./logoAnimation";
 import { makeStyles } from "@material-ui/core/styles";
 import { grey } from "@material-ui/core/colors";
 import { Button } from "react-bootstrap";
@@ -108,18 +110,30 @@ export default function Navbar() {
         }
     }, [open]);
 
+    const handleLogout = async (e) => {
+        console.log("I am here..");
+        await axios.post(process.env.REACT_APP_BACK_URL + "/user/logout", { withCredentials: true });
+        window.location.reload();
+    };
+
     return (
         <div>
             <nav className="navbar navbar-light px-5 py-3 customBackgound" /* style={{ backgroundColor: "#395076" }} */>
-                <Link to="/" className="navbar-brand" style={{ textDecoration: "none", color: "white" }}>
-                    Trav Companion
-                </Link>
+                <div className="d-flex flex-row justify-content-end align-items-center">
+                    <div className="">
+                        <LogoAnimation />
+                    </div>
+
+                    <Link to="/" className="navbar-brand" style={{ textDecoration: "none", color: "white" }}>
+                        Trav Companion
+                    </Link>
+                </div>
 
                 <div className="d-flex flex-row justify-content-end align-items-center">
                     <div className={`py-1 px-2 mt-1 mx-3 rounded-pill cursor-pointer`} style={{ backgroundColor: "#506C94" }} onClick={() => setOpen(true)}>
                         <SearchIcon />
                     </div>
-                    <Button block disabled className=" py-1 px-4 mt-1 mx-3 rounded-pill navBar-button">
+                    <Button block className=" py-1 px-4 mt-1 mx-3 rounded-pill navBar-button" onClick={handleLogout}>
                         LOGOUT
                     </Button>
                 </div>

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Card, CardHeader, CardMedia, CardContent, Avatar, IconButton } from "@material-ui/core";
+import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 import { red } from "@material-ui/core/colors";
 import MoreHoriIcon from "@material-ui/icons/MoreHoriz";
 import allActions from "../../actions";
@@ -65,7 +66,7 @@ export default function Posts() {
                               }
                               title={`${post.author.firstname} ${post.author.surname}`}
                               /* subheader="September 14, 2016" */
-                              subheader={`${post.city}, ${post.country}`}
+                              subheader={` ${post.city}, ${post.country}`}
                           />
                           <CardContent className={classes.cardText}>
                               <div className="px-2 ">{post.content}</div>

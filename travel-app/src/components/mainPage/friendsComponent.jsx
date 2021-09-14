@@ -4,7 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import FriendRequest from "./friendRequest";
 import FriendsList from "./friendsList";
 import blueGrey from "@material-ui/core/colors/blueGrey";
-import { Accordion, AccordionDetails, AccordionSummary, Typography, Badge, Box } from "@material-ui/core";
+import { Accordion, AccordionDetails, AccordionSummary, Badge, Box } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core";
 
@@ -72,33 +72,6 @@ export default function FriendsComponent() {
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
-
-    /*   return (
-        <Container className="h-100 w-100">
-            <div className="d-flex justify-content-between align-items-center px-4 mt-3">
-                <div>
-                    <Box component="span" className={classes.divElement}>
-                        REQUESTS
-                    </Box>
-                </div>
-                <Badge badgeContent={friendRequests.length > 0 ? friendRequests.length : null} color="primary"></Badge>
-            </div>
-
-            <FriendRequest />
-
-            <div className="d-flex justify-content-between align-items-center px-4 mt-4">
-                <div>
-                    <Box component="span" className={classes.divElement}>
-                        CONTACTS
-                    </Box>
-                </div>
-                <Badge badgeContent={friendsList.length > 0 ? friendsList.length : null} color="primary"></Badge>
-            </div>
-            <FriendsList />
-        </Container>
-    );
-}
- */
 
     return (
         <Container fluid className="h-100 w-100 px-0 no-gutters mt-4">

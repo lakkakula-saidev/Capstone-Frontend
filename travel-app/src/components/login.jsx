@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import { Button, Row, Col, Spinner } from "react-bootstrap";
+import LoadingAnimation from "./loadingAnime";
+import LogoAnimation from "./logoAnimation";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import allActions from "../actions/index.js";
@@ -55,7 +57,9 @@ export default function Login() {
     return (
         <>
             {user.loading ? (
-                <Spinner animation="grow" variant="success" className="spinnerCenter" />
+                <div className="container">
+                    <LoadingAnimation />
+                </div>
             ) : (
                 <div className="container">
                     <Row>

@@ -25,6 +25,17 @@ export const postReducer = (state = initialState.post, action) => {
                 ...state,
                 selected_trip_details: action.payload
             }
+        case 'SET_SELECTED_TRIP_COUNTRY':
+            return {
+                ...state,
+                selected_trip_country: action.payload
+            }
+        case 'SET_SELECTED_PLACE':
+            return {
+                ...state,
+                selected_place: action.payload
+            }
+
 
         case 'SET_LOADING':
             return {

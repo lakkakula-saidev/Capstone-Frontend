@@ -45,6 +45,8 @@ export default function NavComponent() {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    // These are variables and functions of Profile Dialog
+
     function handleTrips() {
         console.log("i ma here..");
         history.push("/trips");
@@ -105,15 +107,6 @@ export default function NavComponent() {
                         </Avatar>
                     </ListItemAvatar>
                     <ListItemText primary="Profile" classes={{ primary: classes.listItemText }} />
-                </ListItem>
-                <Divider variant="middle" className={classes.divider} />
-                <ListItem>
-                    <ListItemAvatar>
-                        <Avatar style={{ backgroundColor: "white", color: "black" }}>
-                            <BeachAccessIcon />
-                        </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText primary="Vacation" classes={{ primary: classes.listItemText }} />
                 </ListItem>
             </List>
         </Container>

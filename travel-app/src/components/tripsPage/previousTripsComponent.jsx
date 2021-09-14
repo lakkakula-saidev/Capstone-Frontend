@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,6 +7,7 @@ import ImageListItem from "@material-ui/core/ImageListItem";
 import ImageListItemBar from "@material-ui/core/ImageListItemBar";
 import Typography from "@material-ui/core/Typography";
 import allActions from "../../actions";
+import NoTripAnimation from "./noTripsAnime";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -49,7 +50,6 @@ export default function PreviousTripsComponent() {
     const user = useSelector((store) => store.user);
     const userPosts = useSelector((store) => store.post);
     const dispatch = useDispatch();
-
     const classes = useStyles();
 
     function setTrip(data) {
@@ -57,24 +57,28 @@ export default function PreviousTripsComponent() {
     }
 
     return (
-        <Container className="h-100 customScrollbar bg-white mt-3 py-3 px-4 customRoundingContainer" style={{ overflowY: "scroll" }}>
-            <Row className="no-gutters ">
+        <div className="h-100 w-100 customScrollbar bg-white mt-3 py-3 px-4 customRoundingContainer">
+            <div className="w-100 " style={{ position: "fixed", zIndex: "10", backgroundColor: "white" }}>
                 <Typography variant="h5" color="textPrimary" component="p">
                     Your completed expeditions
                 </Typography>
+            </div>
+            <Row className=" mt-4" style={{ overflowY: "scroll" }}>
+                {userPosts.user_posts.length > 0 ? (
+                    userPosts.user_posts.map((item) => (
+                        <Col sm={12} md={4} className="pb-4" key={item._id} onClick={() => setTrip(item)}>
+                            <ImageList className={classes.ImageList}>
+                                <ImageListItem className="w-100 tripsItem">
+                                    <img src={`https://source.unsplash.com/1600x900/?${item}`} className="cursor-pointer" />
+                                    <ImageListItemBar className={classes.ImageListItemBar} title={`${item}`} /* subtitle={<span> {item.country}</span> }*/ />
+                                </ImageListItem>
+                            </ImageList>
+                        </Col>
+                    ))
+                ) : (
+                    <NoTripAnimation />
+                )}
             </Row>
-            <Row className=" mt-4">
-                {userPosts.user_posts.map((item) => (
-                    <Col sm={12} md={4} className="pb-4" key={item._id} onClick={() => setTrip(item)}>
-                        <ImageList className={classes.ImageList}>
-                            <ImageListItem className="w-100 tripsItem">
-                                <img src={`https://source.unsplash.com/1600x900/?${item.country}`} className="cursor-pointer" />
-                                <ImageListItemBar className={classes.ImageListItemBar} title={`${item.country}`} /* subtitle={<span> {item.country}</span> }*/ />
-                            </ImageListItem>
-                        </ImageList>
-                    </Col>
-                ))}
-            </Row>
-        </Container>
+        </div>
     );
 }
