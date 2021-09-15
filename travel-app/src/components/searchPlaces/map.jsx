@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { GoogleMap, useJsApiLoader, Marker, InfoWindow } from "@react-google-maps/api";
 import { Spinner } from "react-bootstrap";
+import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import { useDispatch, useSelector } from "react-redux";
 import allActions from "../../actions/index.js";
 import { makeStyles } from "@material-ui/core/styles";
@@ -46,9 +47,20 @@ export default function Map() {
         googleMapsApiKey: process.env.REACT_APP_MAPS_KEY
     });
 
+    const user = useSelector((store) => store.user.currentUser);
+
+    useEffect(() => {
+        console.log("I am here... 1");
+        if (result.search_result.length === 0 && result.query.length === 0) {
+            console.log("I am here... 2");
+            dispatch(allActions.searchActions.search_Place(`${user.city}, ${user.country}`));
+        }
+    }, []);
+
     async function handlePlaceSelection(place) {
         setSelectedPlace(place);
         console.log(place);
+
         dispatch(allActions.searchActions.set_current_selection(place));
     }
 

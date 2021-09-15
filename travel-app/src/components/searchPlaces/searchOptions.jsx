@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./styles.css"; /* 
-import { Carousel } from "react-carousel-minimal"; */
+import "./styles.css";
 import { makeStyles } from "@material-ui/core/styles";
 import { Avatar, Divider } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 import Typography from "@material-ui/core/Typography";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import DiscoverAnimation from "./discoverAnime";
 import { Carousel } from "react-responsive-carousel";
 
 const useStyles = makeStyles((theme) => ({
@@ -50,14 +50,18 @@ export default function SearchOptions() {
             <Row className="font-weight-bold">
                 <Col sm={12} md={12} className="py-2 pl-0 ">
                     <div className="d-flex flex-column align-items-start">
-                        <div>
-                            <Typography variant="h6" color="textPrimary" component="p">
-                                Photography: {selectedPlace ? selectedPlace.name : ""}
-                            </Typography>
-                        </div>
-                        <div className="mt-2" style={{ minWidth: "100%" }}>
-                            {imagesData ? (
-                                /* <Carousel
+                        {Object.keys(selectedPlace).length === 0 ? (
+                            <></>
+                        ) : (
+                            <>
+                                <div>
+                                    <Typography variant="h6" color="textPrimary" component="p">
+                                        Photography: {selectedPlace ? selectedPlace.name : ""}
+                                    </Typography>
+                                </div>
+                                <div className="mt-2" style={{ minWidth: "100%" }}>
+                                    {imagesData ? (
+                                        /* <Carousel
                                     data={imagesData}
                                     width="850px"
                                     time={5000}
@@ -75,17 +79,19 @@ export default function SearchOptions() {
                                         maxHeight: "500px"
                                     }}
                                 /> */
-                                <Carousel showThumbs={false} autoPlay={true} interval={10000} showIndicators={false}>
-                                    {imagesData.map((item) => (
-                                        <div>
-                                            <img src={item.image} />
-                                        </div>
-                                    ))}
-                                </Carousel>
-                            ) : (
-                                "No images yet"
-                            )}
-                        </div>
+                                        <Carousel showThumbs={false} autoPlay={true} interval={10000} showIndicators={false}>
+                                            {imagesData.map((item) => (
+                                                <div>
+                                                    <img src={item.image} />
+                                                </div>
+                                            ))}
+                                        </Carousel>
+                                    ) : (
+                                        "No images yet"
+                                    )}
+                                </div>
+                            </>
+                        )}
                     </div>
                 </Col>
             </Row>
@@ -150,7 +156,9 @@ export default function SearchOptions() {
                     </Row>
                 </>
             ) : (
-                <div>{"No place selected"}</div>
+                <div className="container h-100">
+                    <DiscoverAnimation />
+                </div>
             )}
         </div>
     );

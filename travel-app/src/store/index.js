@@ -36,7 +36,7 @@ export const initialState = {
         search_hosts: {},
         search_hosts_loading: false,
         search_result: [],
-        current_selection: [],
+        current_selection: {},
         loading: false,
         error: false
     }

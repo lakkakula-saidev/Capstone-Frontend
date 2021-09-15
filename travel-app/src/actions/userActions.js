@@ -226,8 +226,13 @@ const update_User = (data) => {
                 payload: true,
             })
             console.log(data)
-            res = await axios.put(endpoint + "/users/me", { ...data });
-            if (typeof res.data === "object" && res.data !== null) {
+            res = await axios.put(endpoint + "/user/me", data, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }, { withCredentials: true });
+
+            if (res) {
 
                 dispatch({
                     type: 'SET_USER',
@@ -317,4 +322,8 @@ const update_Avatar = (data) => {
         }
     }
 }
+
+
+
+
 export default { login_User, register_User, update_User, update_Avatar, login_Google_User, persist_user_login }

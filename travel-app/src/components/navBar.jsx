@@ -96,6 +96,7 @@ export default function Navbar() {
         handleClose();
         const results = await geocodeByAddress(value);
         const latLng = await getLatLng(results[0]);
+        dispatch(allActions.searchActions.set_query(value));
         dispatch(allActions.searchActions.search_Place(value));
         if (latLng) history.push("/search");
     };

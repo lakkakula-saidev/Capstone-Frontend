@@ -9,6 +9,12 @@ export const searchReducer = (state = initialState.search, action) => {
                 ...state,
                 search_result: action.payload
             }
+        case 'ADD_QUERY':
+
+            return {
+                ...state,
+                query: action.payload
+            }
 
         case 'SEARCH_HOSTS_LOADING':
 

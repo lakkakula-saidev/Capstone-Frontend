@@ -15,6 +15,7 @@ export const userReducer = (state = initialState.user, action) => {
                 ...state,
                 loading: action.payload,
             }
+
         case 'SET_ERROR':
             return {
                 ...state,
