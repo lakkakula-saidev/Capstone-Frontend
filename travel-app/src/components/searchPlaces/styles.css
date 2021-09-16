@@ -8,13 +8,11 @@ a[href^="https://maps.google.com/maps"]
 }
 
 .centered {
-    position: absolute;
-    top: 0;
-    bottom: 10%;
-    left: 0;
-    right: 0;
-
-    margin: auto;
+    position: fixed;
+    left: 45%;
+    top: 40%;
+    width: 100%;
+    height: 100%;
 }
 
 .gmnoprint a,

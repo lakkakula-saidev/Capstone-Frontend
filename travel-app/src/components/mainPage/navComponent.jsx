@@ -276,7 +276,7 @@ export default function NavComponent() {
                                     Cancel
                                 </Button>
                                 <Button type="submit" className="py-1 px-3 mt-1 ml-2 rounded-pill" color="primary">
-                                    Post
+                                    Update
                                 </Button>
                             </div>
                         </form>

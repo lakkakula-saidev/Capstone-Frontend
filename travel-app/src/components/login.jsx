@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import { Button, Row, Col, Spinner } from "react-bootstrap";
 import LoadingAnimation from "./loadingAnime";
+import BallsAnimation from "./ballsAnime";
 import LogoAnimation from "./logoAnimation";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -58,7 +59,7 @@ export default function Login() {
         <>
             {user.loading ? (
                 <div className="container">
-                    <LoadingAnimation />
+                    <BallsAnimation />
                 </div>
             ) : (
                 <div className="container">

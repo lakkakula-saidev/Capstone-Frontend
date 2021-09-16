@@ -92,6 +92,7 @@ export default function ProfileComponent() {
                 formData.append("city", city);
                 formData.append("country", country.label);
                 formData.append("content", content);
+                formData.append("surname", surname);
                 formData.append("cover", imageFormData);
                 for (var key of formData.entries()) {
                     console.log(key[0] + ", " + key[1]);
@@ -106,6 +107,8 @@ export default function ProfileComponent() {
                 formData.append("city", city);
                 formData.append("country", country.label);
                 formData.append("content", content);
+                formData.append("surname", surname);
+
                 dispatch(allActions.postActions.new_post(formData));
                 handleClose();
             }

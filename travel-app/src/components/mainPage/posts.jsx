@@ -51,29 +51,32 @@ export default function Posts() {
     return (
         <div className="d-flex flex-column-reverse w-100">
             {completePosts?.length > 0
-                ? completePosts.map((post) => (
-                      <Card className={classes.root} key={uniqid()}>
-                          <CardHeader
-                              avatar={
-                                  <div className="w-100 px-2 py-1">
-                                      <Avatar variant="rounded" className="img-fluid" src={post.author.avatar !== undefined && post.author.avatar !== "none" ? post.author.avatar : ""} />
-                                  </div>
-                              }
-                              action={
-                                  <IconButton aria-label="settings">
-                                      <MoreHoriIcon />
-                                  </IconButton>
-                              }
-                              title={`${post.author.firstname} ${post.author.surname}`}
-                              /* subheader="September 14, 2016" */
-                              subheader={` ${post.city}, ${post.country}`}
-                          />
-                          <CardContent className={classes.cardText}>
-                              <div className="px-2 ">{post.content}</div>
-                          </CardContent>
-                          <div className="px-4 pb-4">{post.hasOwnProperty("cover") ? <CardMedia className={classes.media} image={post.cover} title="Paella dish" /> : ""}</div>
-                      </Card>
-                  ))
+                ? completePosts.map((post) => {
+                      const userCheck = post.author._id.toString() === user._id;
+                      return (
+                          <Card className={classes.root} key={uniqid()}>
+                              <CardHeader
+                                  avatar={
+                                      <div className="w-100 px-2 py-1">
+                                          <Avatar variant="rounded" className="img-fluid" src={post.author.avatar !== undefined && post.author.avatar !== "none" ? post.author.avatar : ""} />
+                                      </div>
+                                  }
+                                  action={
+                                      <IconButton aria-label="settings">
+                                          <MoreHoriIcon />
+                                      </IconButton>
+                                  }
+                                  title={userCheck ? `${user.firstname} ${user.surname}` : `${post.author.firstname} ${post.author.surname}`}
+                                  /* subheader="September 14, 2016" */
+                                  subheader={` ${post.city}, ${post.country}`}
+                              />
+                              <CardContent className={classes.cardText}>
+                                  <div className="px-2 ">{post.content}</div>
+                              </CardContent>
+                              <div className="px-4 pb-4">{post.hasOwnProperty("cover") ? <CardMedia className={classes.media} image={post.cover} /> : ""}</div>
+                          </Card>
+                      );
+                  })
                 : ""}
         </div>
     );

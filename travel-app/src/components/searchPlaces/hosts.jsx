@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Container, Spinner, Row } from "react-bootstrap";
+import { Container, Spinner, Row, Badge } from "react-bootstrap";
 import { makeStyles } from "@material-ui/core/styles";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import { Avatar } from "@material-ui/core";
@@ -46,7 +46,7 @@ export default function FriendsList() {
         Object.keys(user).length > 0 && user.hasOwnProperty("friends") && user.friends.length > 0
             ? user.friends.filter((connection) => connection.requester._id.toString() === user._id.toString() && connection.status === 1)
             : null;
-
+    console.log(pendingRequests);
     function hostsFilter() {
         if (Object.keys(hosts).length > 0 && hosts.hasOwnProperty("response") && hosts.response.length > 0) {
             const temp = hosts.response.filter((host) => {
@@ -80,10 +80,15 @@ export default function FriendsList() {
                                             friendsList !== null
                                                 ? friendsList.some((friend) => friend.recipient._id.toString() === host._id.toString() || friend.requester._id.toString() === host._id.toString())
                                                 : null;
-                                        console.log(prevFriends);
-
+                                        const requestSent =
+                                            pendingRequests.length > 0
+                                                ? pendingRequests.some((friend) => {
+                                                      return friend.recipient._id.toString() === host._id.toString() && friend.status === 1;
+                                                  })
+                                                : null;
+                                        console.log(requestSent, host._id);
                                         return (
-                                            <div className="pb-2 customRounding cursor-pointer hoverClass" id={host._id}>
+                                            <div className="pb-2 customRounding hoverClass" id={host._id}>
                                                 <div className="d-flex justify-content-between align-items-center pt-2">
                                                     <div className="d-flex justify-content-start align-items-center">
                                                         <div className="px-2">
@@ -95,9 +100,11 @@ export default function FriendsList() {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="px-2">
+                                                    <div className="px-2 cursor-pointer">
                                                         {prevFriends ? (
                                                             <PeopleAltIcon className={classes.PeopleAltIcon} />
+                                                        ) : requestSent ? (
+                                                            <Badge style={{ backgroundColor: "#4caf50", color: "white" }}>Requested </Badge>
                                                         ) : (
                                                             <PersonAddIcon
                                                                 className={classes.small}

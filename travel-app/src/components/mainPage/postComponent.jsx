@@ -118,7 +118,7 @@ export default function PostComponent() {
                 <Paper component="form" className={classes.root}>
                     <IconButton className={classes.iconButton} aria-label="menu">
                         <div className="px-2 py-1">
-                            <Avatar variant="rounded" className={classes.large} src="https://source.unsplash.com/random" />
+                            <Avatar variant="rounded" className={classes.large} src={user.currentUser.avatar !== "none" ? user.currentUser.avatar : "https://source.unsplash.com/random"} />
                         </div>
                     </IconButton>
                     <InputBase className={classes.input} disabled={true} placeholder={`What's new, ${user.currentUser.username}?`} inputProps={{ "aria-label": "search google maps" }} />

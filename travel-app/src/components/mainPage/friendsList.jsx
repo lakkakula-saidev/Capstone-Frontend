@@ -199,7 +199,7 @@ export default function FriendsList() {
                               <div className="d-flex justify-content-between align-items-center pt-2">
                                   <div className="d-flex justify-content-start align-items-center">
                                       <div className="px-2">
-                                          <Avatar variant="rounded" className={classes.large} src="https://source.unsplash.com/random" />
+                                          <Avatar variant="rounded" className={classes.large} src={contact.avatar !== "none" ? contact.avatar : "https://source.unsplash.com/random"} />
                                       </div>
                                       <div className="px-2">
                                           <div>
@@ -293,7 +293,7 @@ export default function FriendsList() {
                             />
                             {/* <InputEmoji value={message} height={10} onChange={setMessage} cleanOnEnter onEnter={(e) => handleNewMessage(e)} placeholder="Type a message" /> */}
                         </form>
-                        <div className="px-1" onClick={handleClickEmoji}>
+                        <div className="px-1 cursor-pointer" onClick={handleClickEmoji}>
                             <EmojiLaughing size="20" />
                         </div>
 
