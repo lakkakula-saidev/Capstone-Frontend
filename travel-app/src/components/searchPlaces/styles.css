@@ -6,6 +6,20 @@ a[href^="https://maps.google.com/maps"]
 {
     display: none !important;
 }
+@import url("https://fonts.googleapis.com/css2?family=Asap:ital@1&family=Nunito+Sans:wght@700&family=Nunito:ital@1&family=Playfair+Display:wght@400;600&display=swap");
+
+#backgroundImage {
+    background: url(../../Collage\ LoginPage.jpeg);
+
+    background-size: 100% 100%;
+}
+
+.NameWebsite {
+    font-family: "Asap", sans-serif;
+    font-family: "Nunito", sans-serif;
+    font-family: "Nunito Sans", sans-serif;
+    font-family: "Playfair Display", serif;
+}
 
 .centered {
     position: fixed;
@@ -51,6 +65,9 @@ body {
 
 .customRounding {
     border-radius: 10px;
+}
+.textAlignCenter {
+    text-align: center;
 }
 
 .buttonRounding {

@@ -5,7 +5,6 @@ import axios from "axios";
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { BrowserRouter as Router, HashRouter, Route, Switch } from 'react-router-dom'
-import { useHistory } from "react-router-dom";
 import LoginPage from './components/login.jsx'
 import MainPage from './components/mainPage/index.jsx'
 import TripsPage from './components/tripsPage/index.jsx'
@@ -18,7 +17,6 @@ export default function App() {
 
   axios.defaults.withCredentials = true
   const user = useSelector(state => state.user)
-  const history = useHistory();
   const endpoint = process.env.REACT_APP_BACK_URL;
   const loggedIn = user.loggedIn
 
@@ -37,7 +35,9 @@ export default function App() {
   if (!user.currentUser._id) {
     console.log(!user.currentUser._id)
     return <Router>
+
       <Route render={routerProps => <LoginPage {...routerProps} />} exact path='/' />
+
     </Router>
   } else {
 

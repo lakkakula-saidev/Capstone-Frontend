@@ -1,4 +1,3 @@
-import ReactDOM from "react-dom";
 import "./styles.css";
 import React, { Component } from "react";
 import anime from "animejs";

@@ -1,6 +1,6 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import FriendRequest from "./friendRequest";
 import FriendsList from "./friendsList";
 import blueGrey from "@material-ui/core/colors/blueGrey";

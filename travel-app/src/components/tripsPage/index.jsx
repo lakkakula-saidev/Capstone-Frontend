@@ -1,4 +1,4 @@
-import { Container, Row, Col, Spinner } from "react-bootstrap";
+import { Row, Col, Spinner } from "react-bootstrap";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NavComponent from "../mainPage/navComponent";
@@ -9,7 +9,6 @@ import TripDetailCities from "./tripDetailCities";
 
 export default function TripsPage() {
     const dispatch = useDispatch();
-    const user = useSelector((store) => store.user.currentUser);
     const userPosts = useSelector((store) => store.post);
 
     useEffect(() => {

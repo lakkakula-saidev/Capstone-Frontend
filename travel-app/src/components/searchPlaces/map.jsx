@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, useJsApiLoader, Marker, InfoWindow } from "@react-google-maps/api";
 import { Spinner } from "react-bootstrap";
-import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import { useDispatch, useSelector } from "react-redux";
 import allActions from "../../actions/index.js";
 import { makeStyles } from "@material-ui/core/styles";
@@ -22,17 +21,10 @@ const useStyles = makeStyles({
     }
 });
 
-const MapsKey = process.env.REACT_APP_MAPS_KEY;
-
 const containerStyle = {
     width: "100%",
     height: "100%",
     borderRadius: "20px"
-};
-
-const center = {
-    lat: -3.745,
-    lng: -38.523
 };
 
 const photos_Endpoint = process.env.REACT_APP_PHOTO_URL;

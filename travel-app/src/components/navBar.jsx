@@ -6,16 +6,15 @@ import { makeStyles } from "@material-ui/core/styles";
 import { grey } from "@material-ui/core/colors";
 import { Button } from "react-bootstrap";
 import countryList from "react-select-country-list";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import TextField from "@material-ui/core/TextField";
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import allActions from "../actions/index.js";
 import SearchIcon from "@material-ui/icons/Search";
 import PlaceIcon from "@material-ui/icons/Place";
 import { Dialog, DialogTitle, DialogContentText, DialogContent } from "@material-ui/core";
-import Slide from "@material-ui/core/Slide";
 import List from "@material-ui/core/List";
-import { ListItem, ListItemAvatar, Avatar, ListItemText } from "@material-ui/core";
+import { ListItem, ListItemAvatar, ListItemText } from "@material-ui/core";
 import ReactCountryFlag from "react-country-flag";
 
 const useStyles = makeStyles((theme) => ({
@@ -55,10 +54,6 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
-});
-
 const countries = [
     { code: "USA", name: "USA" },
     { code: "GB", name: "UK" },
@@ -70,7 +65,6 @@ export default function Navbar() {
     const classes = useStyles();
     const [address, setAddress] = useState("");
     const [open, setOpen] = React.useState(false);
-    const user = useSelector((store) => store.user);
     const [scroll, setScroll] = React.useState("paper");
     const options = useMemo(() => countryList().setLabel("US", "USA"), []);
     /*   options.setLabel("GB", "UK");
@@ -83,10 +77,6 @@ export default function Navbar() {
 
     const dispatch = useDispatch();
     const history = useHistory();
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
 
     const handleClose = () => {
         setOpen(false);
@@ -120,13 +110,13 @@ export default function Navbar() {
     return (
         <div>
             <nav className="navbar navbar-light px-5 py-3 customBackgound" /* style={{ backgroundColor: "#395076" }} */>
-                <div className="d-flex flex-row justify-content-end align-items-center">
+                <div className="d-flex flex-row justify-content-end align-items-center NameWebsite">
                     <div className="">
                         <LogoAnimation />
                     </div>
 
-                    <Link to="/" className="navbar-brand" style={{ textDecoration: "none", color: "white" }}>
-                        Trav Companion
+                    <Link to="/" className="navbar-brand" style={{ textDecoration: "none", color: "white", fontSize: "25px" }}>
+                        TravCompanion
                     </Link>
                 </div>
 

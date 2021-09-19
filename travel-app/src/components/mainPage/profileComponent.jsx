@@ -1,9 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { Container, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { IconButton, Paper, InputBase, Avatar, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@material-ui/core";
-import Autocomplete from "@material-ui/lab/Autocomplete";
 import Posts from "./posts";
 import allActions from "../../actions/index.js";
 
@@ -55,7 +54,6 @@ export default function ProfileComponent() {
     const [country, setCountry] = useState(null);
     const [content, setContent] = useState("");
     const [cityError, setCityError] = useState(false);
-    const [countryError, setCountryError] = useState(false);
     const [contentError, setContentError] = useState(false);
     const [imageFormData, setImageFormData] = useState(null);
 

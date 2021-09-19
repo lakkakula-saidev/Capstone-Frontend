@@ -30,16 +30,10 @@ export default function FriendRequest() {
     const classes = useStyles();
     const dispatch = useDispatch();
     const user = useSelector((store) => store.user.currentUser);
-    const hosts = useSelector((store) => store.search.search_hosts);
     const friendRequests =
         Object.keys(user).length > 0 && user.hasOwnProperty("friends") && user.friends.length > 0
             ? user.friends.filter((connection) => connection.requester._id.toString() === user._id.toString() && connection.status === 2)
             : null;
-    const pendingRequests =
-        Object.keys(user).length > 0 && user.hasOwnProperty("friends") && user.friends.length > 0
-            ? user.friends.filter((connection) => connection.requester._id.toString() === user._id.toString() && connection.status === 1)
-            : null;
-    const friendsList = Object.keys(user).length > 0 && user.hasOwnProperty("friends") && user.friends.length > 0 ? user.friends.filter((connection) => connection.status === 3) : null;
 
     return (
         <div className="w-100">

@@ -35,7 +35,7 @@ export const chatReducer = (state = initialState.chat, action) => {
                 current_chat_room: action.payload
             }
         case 'ADD_CURRENT_ROOM_REDUX':
-            console.log(action.payload)
+
             return {
                 ...state,
                 prev_chat_rooms: [...state.prev_chat_rooms.filter(room => room._id !== action.payload._id), action.payload]

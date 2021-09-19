@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Accordion, AccordionDetails, AccordionSummary, Box, Badge } from "@material-ui/core";
@@ -18,9 +18,6 @@ const useStyles = makeStyles((theme) => ({
         }
     }
 }));
-
-const photos_Endpoint = process.env.REACT_APP_PHOTO_URL;
-const placesKey = process.env.REACT_APP_GOOGLE_PLACES_KEY;
 
 export default function TripDetailCities() {
     const classes = useStyles();

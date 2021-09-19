@@ -1,5 +1,4 @@
 import "./tripsPage/styles.css";
-import { BallTriangle } from "svg-loaders-react";
 import React, { Component } from "react";
 import anime from "animejs";
 
@@ -28,7 +27,6 @@ export default class BallsAnimation extends Component {
     render() {
         return (
             <div className="centered h-25 w-25">
-                {/* <BallTriangle stroke="#3F4F7D" /> */}
                 <svg width="100" height="100" viewBox="0 0 57 57" xmlns="http://www.w3.org/2000/svg">
                     <g fillRule="evenodd">
                         <g transform="translate(1 1)" stroke-width="2">

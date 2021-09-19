@@ -1,17 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import ImageList from "@material-ui/core/ImageList";
-import ImageListItem from "@material-ui/core/ImageListItem";
-import ImageListItemBar from "@material-ui/core/ImageListItemBar";
 import Typography from "@material-ui/core/Typography";
 import allActions from "../../actions";
 import NoTripAnimation from "./noTripsAnime";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 
 const useStyles = makeStyles((theme) => ({
@@ -39,26 +35,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const itemData = [
-    {
-        img: "https://source.unsplash.com/1600x900/?delhi",
-        title: "Image",
-        author: "author"
-    },
-    {
-        img: "https://source.unsplash.com/1600x900/?new york",
-        title: "Image1",
-        author: "author"
-    },
-    {
-        img: "https://source.unsplash.com/1600x900/?paris",
-        title: "Image2",
-        author: "author"
-    }
-];
-
 export default function PreviousTripsComponent() {
-    const user = useSelector((store) => store.user);
     const userPosts = useSelector((store) => store.post);
     const dispatch = useDispatch();
     const classes = useStyles();
@@ -84,7 +61,7 @@ export default function PreviousTripsComponent() {
                                 <CardActionArea>
                                     <CardMedia className={classes.media} image={`https://source.unsplash.com/1000x900/?${item}`} />
                                     <CardContent>
-                                        <Typography gutterBottom variant="h5" component="h2">
+                                        <Typography gutterBottom variant="p" component="h6">
                                             {`${item}`}
                                         </Typography>
                                     </CardContent>

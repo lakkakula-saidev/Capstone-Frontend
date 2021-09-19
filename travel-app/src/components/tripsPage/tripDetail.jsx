@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Col } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
@@ -11,30 +10,13 @@ import NavigateNextOutlinedIcon from "@material-ui/icons/NavigateNextOutlined";
 import NavigateBeforeOutlinedIcon from "@material-ui/icons/NavigateBeforeOutlined";
 import allActions from "../../actions/index.js";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: "flex",
-        "& > *": {
-            margin: theme.spacing(1)
-        },
-        Typography: {
-            textAlign: "center"
-        }
-    }
-}));
-
 export default function TripDetails() {
-    const classes = useStyles();
     const dispatch = useDispatch();
     const posts = useSelector((store) => store.post);
     const selectedTripDetails = useSelector((store) => store.post.selected_trip_details);
     const selectedCountry = useSelector((store) => store.post.selected_trip_country);
     const [currentPage, setCurrentPage] = useState(0);
     const selectedPlace = useSelector((store) => store.post.selected_place);
-
-    function firstLetter(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-    }
 
     function photosCarousel() {
         if (selectedTripDetails && Object.keys(selectedTripDetails).length > 0 && selectedTripDetails.hasOwnProperty(selectedPlace)) {
@@ -95,7 +77,7 @@ export default function TripDetails() {
                                 <Carousel showThumbs={false} autoPlay={true} interval={10000} showIndicators={false}>
                                     {imagesData.map((item) => (
                                         <div>
-                                            <img src={item.image} />
+                                            <img src={item.image} alt="No item found" />
                                         </div>
                                     ))}
                                 </Carousel>

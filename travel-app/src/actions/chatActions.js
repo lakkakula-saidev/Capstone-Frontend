@@ -59,7 +59,7 @@ export const fetch_new_chat_rooms = (data) => {
                 payload: true,
             })
             res = await axios.post(endpoint + "/rooms", data, { withCredentials: true });
-            console.log(res)
+
             if (res.status === 200 || res.status === 201) {
 
                 dispatch({

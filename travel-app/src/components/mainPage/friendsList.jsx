@@ -2,13 +2,13 @@ import React, { useMemo, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MoreHorizOutlinedIcon from "@material-ui/icons/MoreHorizOutlined";
 import { grey, blueGrey } from "@material-ui/core/colors";
-import { MicFill, Paperclip, EmojiLaughing } from "react-bootstrap-icons";
+import { Paperclip, EmojiLaughing } from "react-bootstrap-icons";
 import Typography from "@material-ui/core/Typography";
 import Picker from "emoji-picker-react";
 import Popover from "@material-ui/core/Popover";
 import io from "socket.io-client";
 import allActions from "../../actions/index.js";
-import { makeStyles, DialogActions, DialogContent, DialogContentText, DialogTitle, Dialog, Avatar, TextField, Chip } from "@material-ui/core";
+import { makeStyles, DialogActions, DialogContent, DialogTitle, Dialog, Avatar, TextField } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -76,11 +76,10 @@ export default function FriendsList() {
     const classes = useStyles();
     const dispatch = useDispatch();
     const user = useSelector((store) => store.user.currentUser);
-    const hosts = useSelector((store) => store.search.search_hosts);
-    const friendRequests =
+    /*    const friendRequests =
         Object.keys(user).length > 0 && user.hasOwnProperty("friends") && user.friends.length > 0
             ? user.friends.filter((connection) => connection.requester._id.toString() === user._id.toString() && connection.status === 2)
-            : null;
+            : null; */
     const friendsList = Object.keys(user).length > 0 && user.hasOwnProperty("friends") && user.friends.length > 0 ? user.friends.filter((connection) => connection.status === 3) : null;
 
     const [open, setOpen] = useState(false);
@@ -139,7 +138,9 @@ export default function FriendsList() {
     }
 
     function handleStartChat(e, target) {
+        e.preventDefault();
         dispatch(allActions.chatActions.fetch_new_chat_rooms({ members: [target._id, user._id] }));
+
         handleClickOpen("paper");
     }
 
@@ -229,7 +230,7 @@ export default function FriendsList() {
                         <div className="d-flex justify-content-between align-items-center ">
                             <div className="d-flex justify-content-start align-items-center">
                                 <div className="">
-                                    <Avatar variant="rounded" className={classes.medium} src="https://source.unsplash.com/random" />
+                                    <Avatar variant="rounded" className={classes.medium} src={receiver && receiver.avatar !== "none" ? receiver.avatar : "https://source.unsplash.com/random"} />
                                 </div>
                                 <div className="pl-3">
                                     <Typography variant="subtitle1" gutterBottom>

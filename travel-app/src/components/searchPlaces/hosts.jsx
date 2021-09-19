@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Container, Spinner, Row, Badge } from "react-bootstrap";
 import { makeStyles } from "@material-ui/core/styles";
@@ -36,10 +36,6 @@ export default function FriendsList() {
 
     const user = useSelector((store) => store.user.currentUser);
 
-    const friendRequests =
-        Object.keys(user).length > 0 && user.hasOwnProperty("friends") && user.friends.length > 0
-            ? user.friends.filter((connection) => connection.requester._id.toString() === user._id.toString() && connection.status === 2)
-            : null;
     const friendsList = Object.keys(user).length > 0 && user.hasOwnProperty("friends") && user.friends.length > 0 ? user.friends.filter((connection) => connection.status === 3) : null;
 
     const pendingRequests =

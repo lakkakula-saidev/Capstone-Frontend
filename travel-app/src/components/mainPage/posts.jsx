@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Card, CardHeader, CardMedia, CardContent, Avatar, IconButton } from "@material-ui/core";
-import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 import { red } from "@material-ui/core/colors";
 import MoreHoriIcon from "@material-ui/icons/MoreHoriz";
 import allActions from "../../actions";

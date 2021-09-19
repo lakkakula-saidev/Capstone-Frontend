@@ -27,7 +27,7 @@ export default class DiscoverAnimation extends Component {
     render() {
         return (
             <div className="d-flex h-100 w-100 mt-4">
-                <svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" width="100%" viewBox="0 0 832.02831 750">
+                <svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" width="100%" height="80%" viewBox="0 0 832.02831 750" preserveAspectRatio="none">
                     <g>
                         <title>Layer 1</title>
                         <path fill="#e6e6e6" d="m393.37761,644.35677s-12.753,-31.391 25.505,-54.934l-25.505,54.934z" data-name="Path 482" id="efdf5e1f-6b90-40c1-9274-afa2b16f39be" />
