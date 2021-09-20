@@ -55,6 +55,8 @@ export default function FriendsList() {
 
     const filteredHosts = hostsFilter();
 
+    console.log(filteredHosts);
+
     return (
         <Container>
             <Row className="d-flex align-items-center">
@@ -68,9 +70,9 @@ export default function FriendsList() {
                             </span>{" "}
                             found in this region
                         </div>
-                        {filteredHosts !== null && filteredHosts.length > 0 ? (
+                        {filteredHosts !== null /* && filteredHosts.length > 0 */ ? (
                             <div className="d-flex flex-column p-3 my-3 bg-white customRounding">
-                                {filteredHosts !== null && filteredHosts.length > 0 ? (
+                                {filteredHosts !== null /* && filteredHosts.length > 0 */ ? (
                                     filteredHosts.map((host) => {
                                         const prevFriends =
                                             friendsList !== null

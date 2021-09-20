@@ -9,7 +9,7 @@ export default class DiscoverAnimation extends Component {
 
     animation() {
         anime({
-            targets: "svg path",
+            targets: "svg g #svg_11",
             stroke: this.state.colorArray.sort((a, b) => 0.5 - Math.random()),
             strokeDashoffset: [anime.setDashoffset, 0],
             easing: "cubicBezier(.5, .05, .1, .3)",
