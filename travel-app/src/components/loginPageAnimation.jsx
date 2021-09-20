@@ -20,7 +20,7 @@ export default class LoginPageAnimation extends Component {
         });
         anime({
             targets: "svg g g #svg_41",
-            fill: this.state.sunArray.sort((a, b) => 0.5 - Math.random()),
+
             translateX: "10px",
             translateY: "8px",
             easing: "cubicBezier(0.42, 0, 0.42, 0)",
@@ -32,13 +32,17 @@ export default class LoginPageAnimation extends Component {
         });
         anime({
             targets: "svg g #svg_45",
+            fill: this.state.sunArray.sort((a, b) => 0.5 - Math.random()),
             scaleX: 1.25,
             scaleY: 1.25,
             translateX: "-15px",
             translateY: "-15px",
             easing: "cubicBezier(0.42, 0, 0.58, 1)",
             loop: true,
-            duration: 10000
+            duration: 10000,
+            delay: function (el, i) {
+                return i * 250;
+            }
         });
     }
     componentDidMount() {
