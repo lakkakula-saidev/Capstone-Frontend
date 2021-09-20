@@ -79,7 +79,7 @@ export default function FriendsList() {
                                                 ? friendsList.some((friend) => friend.recipient._id.toString() === host._id.toString() || friend.requester._id.toString() === host._id.toString())
                                                 : null;
                                         const requestSent =
-                                            pendingRequests.length > 0
+                                            pendingRequests !== null && pendingRequests.length > 0
                                                 ? pendingRequests.some((friend) => {
                                                       return friend.recipient._id.toString() === host._id.toString() && friend.status === 1;
                                                   })
