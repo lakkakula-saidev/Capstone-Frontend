@@ -37,7 +37,7 @@ export default class LoginPageAnimation extends Component {
             scaleY: 1.25,
             translateX: "-15px",
             translateY: "-15px",
-            easing: "cubicBezier(0.42, 0, 0.58, 1)",
+            easing: "cubicBezier(0.42, 0, 0.58 , 1)",
             loop: true,
             duration: 10000,
             delay: function (el, i) {
