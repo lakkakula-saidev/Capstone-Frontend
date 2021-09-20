@@ -15,7 +15,7 @@ a[href^="https://maps.google.com/maps"]
 }
 
 .carousel .slide img {
-    max-width: 100% important;
+    max-width: 100% !important;
 }
 
 .NameWebsite {
