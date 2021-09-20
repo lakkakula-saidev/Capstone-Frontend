@@ -70,12 +70,12 @@ export default function FriendsList() {
                             </span>{" "}
                             found in this region
                         </div>
-                        {filteredHosts !== null /* && filteredHosts.length > 0 */ ? (
+                        {filteredHosts !== null && filteredHosts.length > 0 ? (
                             <div className="d-flex flex-column p-3 my-3 bg-white customRounding">
-                                {filteredHosts !== null /* && filteredHosts.length > 0 */ ? (
+                                {filteredHosts !== null && filteredHosts.length > 0 ? (
                                     filteredHosts.map((host) => {
                                         const prevFriends =
-                                            friendsList !== null
+                                            friendsList !== null && friendsList.length > 0
                                                 ? friendsList.some((friend) => friend.recipient._id.toString() === host._id.toString() || friend.requester._id.toString() === host._id.toString())
                                                 : null;
                                         const requestSent =
