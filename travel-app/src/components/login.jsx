@@ -59,10 +59,10 @@ export default function Login() {
                     <BallsAnimation />
                 </div>
             ) : (
-                <div className="container-fluid" style={{ height: "100vh", backgroundColor: "#e3f2fd" }}>
-                    <h2 className="font-weight-bold" style={{ position: "absolute", top: "5%", left: "5%" }}>
+                <div className="container-fluid loginBackground" style={{ height: "100vh" /* , backgroundColor: "#e3f2fd" */ }}>
+                    <h1 className="font-weight-bold" style={{ position: "absolute", top: "5%", left: "5%" }}>
                         TravCompanion
-                    </h2>
+                    </h1>
                     <Row>
                         <Col xs={12} sm={12} md={6} lg={6} className=" py-4 my-5 d-flex flex-column align-items-center justify-content-center ">
                             <Container fluid className=" h-100 w-100">

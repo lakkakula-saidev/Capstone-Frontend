@@ -5,7 +5,8 @@ import anime from "animejs";
 export default class LoginPageAnimation extends Component {
     state = {
         colorArray: ["#356F8E", "#2F2E41"],
-        sunArray: ["#B8C6C9", "#FFE484", "#FFCC33", "#FC9601", "#D14009"]
+        sunArray: ["#B8C6C9", "#FFE484", "#FFCC33", "#FC9601", "#D14009"],
+        cloudArray: ["#eeeeee", "#e0e0e0", "#bdbdbd"]
     };
     animation() {
         anime({
@@ -42,6 +43,17 @@ export default class LoginPageAnimation extends Component {
             duration: 10000,
             delay: function (el, i) {
                 return i * 250;
+            }
+        });
+        anime({
+            targets: "svg g #svg_47, #svg_31 ",
+            fill: this.state.cloudArray.sort((a, b) => 0.5 - Math.random()),
+            translateX: "-30px",
+            easing: "cubicBezier(0.42, 0, 0.58 , 1)",
+            loop: true,
+            duration: 10000,
+            delay: function (el, i) {
+                return i * 100;
             }
         });
     }
@@ -164,6 +176,7 @@ export default class LoginPageAnimation extends Component {
                         d="m33.26122,183.14997a0.62928,0.39712 0 1 1 0,-0.79423l41.65433,0a19.90732,12.56281 0 0 1 19.25947,-9.60148a27.68424,17.47055 0 0 1 50.28412,-3.72681c0.61898,-0.03044 1.22621,-0.04576 1.81006,-0.04576a23.50248,14.83159 0 0 1 23.37549,13.74334a0.62922,0.39708 0 0 1 -0.58372,0.42397c-0.01498,0.00068 -0.02988,0.00097 -0.04471,0.00097a0.62924,0.39709 0 0 1 -0.62705,-0.36929l-135.12798,0.36929l-0.00001,0z"
                         id="svg_47"
                         stroke="null"
+                        style={{ zIndex: -1000 }}
                     />
                     <path
                         fill="#e6e6e6"
